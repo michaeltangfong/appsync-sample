@@ -1,105 +1,106 @@
-﻿schema {
-  query: Query
-  mutation: Mutation
-  subscription: Subscription
-}
-
-type Mutation {
-  createMyModelType(input: CreateMyModelTypeInput!): MyModelType
-  deleteMyModelType(input: DeleteMyModelTypeInput!): MyModelType
-  updateMyModelType(input: UpdateMyModelTypeInput!): MyModelType
-}
-
-type MyModelType {
-  id: ID!
-  title: String
-}
-
-type MyModelTypeConnection {
-  items: [MyModelType]
-  nextToken: String
-}
-
-type Query {
-  getMyModelType(id: ID!): MyModelType
-  listMyModelTypes(filter: TableMyModelTypeFilterInput, limit: Int, nextToken: String): MyModelTypeConnection
-}
-
-type Subscription {
-  onCreateMyModelType(id: ID, title: String): MyModelType @aws_subscribe(mutations : ["createMyModelType"])
-  onDeleteMyModelType(id: ID, title: String): MyModelType @aws_subscribe(mutations : ["deleteMyModelType"])
-  onUpdateMyModelType(id: ID, title: String): MyModelType @aws_subscribe(mutations : ["updateMyModelType"])
-}
-
-input CreateMyModelTypeInput {
-  title: String
+﻿input CreateMyModelTypeInput {
+	title: String
 }
 
 input DeleteMyModelTypeInput {
-  id: ID!
+	id: ID!
+}
+
+type Mutation {
+	createMyModelType(input: CreateMyModelTypeInput!): MyModelType
+	updateMyModelType(input: UpdateMyModelTypeInput!): MyModelType
+	deleteMyModelType(input: DeleteMyModelTypeInput!): MyModelType
+}
+
+type MyModelType {
+	id: ID!
+	title: String
+}
+
+type MyModelTypeConnection {
+	items: [MyModelType]
+	nextToken: String
+}
+
+type Query {
+	getMyModelType(id: ID!): MyModelType
+	listMyModelTypes(filter: TableMyModelTypeFilterInput, limit: Int, nextToken: String): MyModelTypeConnection
+	getLeftModelType(id: ID!): MyModelType
+	getRightModelType(id: ID!): MyModelType
+}
+
+
+
+type Subscription {
+	onCreateMyModelType(id: ID, title: String): MyModelType
+		@aws_subscribe(mutations: ["createMyModelType"])
+	onUpdateMyModelType(id: ID, title: String): MyModelType
+		@aws_subscribe(mutations: ["updateMyModelType"])
+	onDeleteMyModelType(id: ID, title: String): MyModelType
+		@aws_subscribe(mutations: ["deleteMyModelType"])
 }
 
 input TableBooleanFilterInput {
-  eq: Boolean
-  ne: Boolean
+	ne: Boolean
+	eq: Boolean
 }
 
 input TableFloatFilterInput {
-  between: [Float]
-  contains: Float
-  eq: Float
-  ge: Float
-  gt: Float
-  le: Float
-  lt: Float
-  ne: Float
-  notContains: Float
+	ne: Float
+	eq: Float
+	le: Float
+	lt: Float
+	ge: Float
+	gt: Float
+	contains: Float
+	notContains: Float
+	between: [Float]
 }
 
 input TableIDFilterInput {
-  beginsWith: ID
-  between: [ID]
-  contains: ID
-  eq: ID
-  ge: ID
-  gt: ID
-  le: ID
-  lt: ID
-  ne: ID
-  notContains: ID
+	ne: ID
+	eq: ID
+	le: ID
+	lt: ID
+	ge: ID
+	gt: ID
+	contains: ID
+	notContains: ID
+	between: [ID]
+	beginsWith: ID
 }
 
 input TableIntFilterInput {
-  between: [Int]
-  contains: Int
-  eq: Int
-  ge: Int
-  gt: Int
-  le: Int
-  lt: Int
-  ne: Int
-  notContains: Int
+	ne: Int
+	eq: Int
+	le: Int
+	lt: Int
+	ge: Int
+	gt: Int
+	contains: Int
+	notContains: Int
+	between: [Int]
 }
 
 input TableMyModelTypeFilterInput {
-  id: TableIDFilterInput
-  title: TableStringFilterInput
+	id: TableIDFilterInput
+	title: TableStringFilterInput
 }
 
 input TableStringFilterInput {
-  beginsWith: String
-  between: [String]
-  contains: String
-  eq: String
-  ge: String
-  gt: String
-  le: String
-  lt: String
-  ne: String
-  notContains: String
+	ne: String
+	eq: String
+	le: String
+	lt: String
+	ge: String
+	gt: String
+	contains: String
+	notContains: String
+	between: [String]
+	beginsWith: String
 }
 
 input UpdateMyModelTypeInput {
-  id: ID!
-  title: String
+	id: ID!
+	title: String
 }
